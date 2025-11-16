@@ -2123,4 +2123,631 @@ sap.ui.define([
 		// }
 	});
 });
+******************
+<mvc:View
+    controllerName="com.lam.p2f.orm.zordfd.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:l="sap.ui.layout"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:plugins="sap.m.plugins"
+    xmlns:columnmenu="sap.m.table.columnmenu"
+    xmlns:sap.ui.fl="sap.ui.fl"
+    xmlns:sap.ui.dt="sap.ui.dt"
+    xmlns:vm="sap.ui.fl.variants"
+    xmlns:dnd="sap.ui.core.dnd"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    xmlns:svm="sap.ui.comp.smartvariants"
+>
+    <Page
+        title="Order Fulfillment Dashboard"
+        titleAlignment="Center"
+        showNavButton="true"
+        navButtonPress="onNavBackPress"
+        enableScrolling="false"
+    >
+        <fb:FilterBar
+            id="filterbar"
+            useToolbar="false"
+            search="onFilterPress"
+        >
+            <fb:filterItems>
+                <fb:FilterItem
+                    name="FCID"
+                    label="FCID"
+                >
+                    <fb:control>
+                        <Input
+                            id="FCID"
+                            placeholder="Select FCID"
+                            showValueHelp="true"
+                            valueHelpRequest="onFCIDSelect"
+                            valueHelpOnly="false"
+                            value="{path: 'oFilterHlp>/selFCID', formatter: '.formatMatList'}"
+                        />
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Customer"
+                    label="Customer"
+                >
+                    <fb:control>
+                        <Input
+                            id="customer"
+                            placeholder="Select Customer"
+                            showValueHelp="true"
+                            valueHelpRequest="onCustomerSelect"
+                            valueHelpOnly="false"
+                            value="{path: 'oFilterHlp>/selCustomer', formatter: '.formatMatList'}"
+                        />
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Sales Order"
+                    label="Sales Order"
+                >
+                    <fb:control>
+                        <Input
+                            id="salesOrder"
+                            placeholder="Select Sales Order"
+                            showValueHelp="true"
+                            valueHelpRequest="onSalesOrderSelect"
+                            valueHelpOnly="false"
+                            value="{path: 'oFilterHlp>/selSalesOrder', formatter: '.formatMatList'}"
+                        />
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="System Risk"
+                    label="System Risk"
+                >
+                    <fb:control>
+                        <Input
+                            id="systemRisk"
+                            placeholder="Select System Risk"
+                            showValueHelp="true"
+                            valueHelpRequest="onSystemRiskSelect"
+                            valueHelpOnly="false"
+                            value="{path: 'oFilterHlp>/selSystemRisk', formatter: '.formatMatList'}"
+                        />
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Pilot Project Number"
+                    label="Pilot Project Number"
+                >
+                    <fb:control>
+                        <Input
+                            id="pilotProjectNumber"
+                            placeholder="Select Pilot Project Number"
+                            showValueHelp="true"
+                            valueHelpRequest="onPilotProjectSelect"
+                            valueHelpOnly="false"
+                            value="{path: 'oFilterHlp>/selPilotProject', formatter: '.formatMatList'}"
+                        />
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Config Frozen Date"
+                    label="Config Frozen Date"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="configFrozenDate"
+                            placeholder="Select Config Frozen Date"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Launch Date"
+                    label="Launch Date"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="launchDate"
+                            placeholder="Select LaunchDate"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Actual Ship Date"
+                    label="Actual Ship Date"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="actualShipDate"
+                            placeholder="Select Actual Ship Date"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="TSD"
+                    label="TSD"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="TSD"
+                            placeholder="Select TSD"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="MCSD"
+                    label="MCSD"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="MCSD"
+                            placeholder="Select MCSD"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Pilot WBS Number"
+                    label="Pilot WBS Number"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="pilotWBSNumber"
+                            placeholder="Select Pilot WBS Number"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="MCSD missed flag"
+                    label="MCSD missed flag"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="MCSDmissedflag"
+                            placeholder="Select MCSD missed flag"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="BKO Flag (System level)"
+                    label="BKO Flag (System level)"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="BKOFlag"
+                            placeholder="Select BKO Flag (System level)"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Fab"
+                    label="Fab"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="fab"
+                            placeholder="Select Fab"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Region"
+                    label="Region"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="region"
+                            placeholder="Select Region"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Business Group"
+                    label="Business Group"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="businessGroup"
+                            placeholder="Select Business Group"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="System Group Product"
+                    label="System Group Product"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="systemGroupProduct"
+                            placeholder="Select System Group Product"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Rev Code"
+                    label="Rev Code"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="revCode"
+                            placeholder="Select Rev Code"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Partner function"
+                    label="Partner function"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="partnerFunction"
+                            placeholder="Select Partner function"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Partner ID"
+                    label="Partner ID"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="partnerID"
+                            placeholder="Select Partner ID"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="RSO"
+                    label="RSO"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="RSO"
+                            placeholder="Select RSO"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="OF Team"
+                    label="OF Team"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="OFTeam"
+                            placeholder="Select OF Team"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="SRD"
+                    label="SRD"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="SRD"
+                            placeholder="Select SRD"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Config Frozen Date Item"
+                    label="Config Frozen Date Item"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="configFrozenDateItem"
+                            placeholder="Select Config Frozen Date Item"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Config Frozen date Header"
+                    label="Config Frozen date Header"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="configFrozenDateHeader"
+                            placeholder="Select Config Frozen date Header"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Launch Date2"
+                    label="Launch Date2"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="launchDate2"
+                            placeholder="Select Launch Date2"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Act Ship Date (ASD)"
+                    label="Act Ship Date (ASD)"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="actShipDate"
+                            placeholder="Select Act Ship Date (ASD)"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Ship Quarter"
+                    label="Ship Quarter"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="shipQuarter"
+                            placeholder="Select Ship Quarter"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Ship Year"
+                    label="Ship Year"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="shipYear"
+                            placeholder="Select Ship Year"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Rev Qtr"
+                    label="Rev Qtr"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="revQtr"
+                            placeholder="Select Rev Qtr"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Rev Year"
+                    label="Rev Year"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="revYear"
+                            placeholder="Select Rev Year"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Revenue Risk"
+                    label="Revenue Risk"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="revenueRisk"
+                            placeholder="Select Revenue Risk"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+            </fb:filterItems>
+        </fb:FilterBar>
+        <IconTabBar
+            id="idIconTabBar"
+            select=".onFilterSelect"
+            class="sapUiResponsiveContentPadding"
+        >
+            <items>
+                <!-- <IconTabSeparator /> -->
+                <IconTabFilter
+                    icon="sap-icon://sales-order"
+                    iconColor="Positive"
+                    text="Sales Orders"
+                    key="SalesOrders"
+                    
+                />
+                <IconTabFilter
+                    icon="sap-icon://begin"
+                    iconColor="Positive"
+                    text="Sales Orders2"
+                    key="SalesOrders2"
+                />
+            </items>
+            <content>
+                <Table
+                    id="salesTable"
+                    inset="false"
+                    showSeparators="Inner"
+                    headerText="Sales Order"
+                    items="{oOMDModel>/Data}"
+                >
+                    <columns>
+                        <Column>
+                            <Text
+                                text="FCID"
+                                wrapping="false"
+                            />
+                        </Column>
+                        <Column>
+                            <Text
+                                text="Customer"
+                                wrapping="false"
+                            />
+                        </Column>
+                        <Column>
+                            <Text
+                                text="CustomerFab"
+                                wrapping="false"
+                            />
+                        </Column>
+                        <Column>
+                            <Text
+                                text="Partnerpm"
+                                wrapping="false"
+                            />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <Text
+                                    text="{oOMDModel>Fcid}"
+                                    wrapping="false"
+                                />
+                                <Text
+                                    text="{oOMDModel>Customer}"
+                                    wrapping="false"
+                                />
+                                <Text
+                                    text="{oOMDModel>CustomerFab}"
+                                    wrapping="false"
+                                />
+                                <Text
+                                    text="{oOMDModel>Partnerpm}"
+                                    wrapping="false"
+                                />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </content>
+        </IconTabBar>
+    </Page>
+</mvc:View>
+
+
 
