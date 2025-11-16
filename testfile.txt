@@ -1,1 +1,2126 @@
-testfile
+<mvc:View
+    controllerName="com.lam.p2f.orm.zordfd.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:l="sap.ui.layout"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:plugins="sap.m.plugins"
+    xmlns:columnmenu="sap.m.table.columnmenu"
+    xmlns:sap.ui.fl="sap.ui.fl"
+    xmlns:sap.ui.dt="sap.ui.dt"
+    xmlns:vm="sap.ui.fl.variants"
+    xmlns:dnd="sap.ui.core.dnd"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    xmlns:svm="sap.ui.comp.smartvariants"
+>
+    <Page
+        title="Order Fulfillment Dashboard"
+        titleAlignment="Center"
+        showNavButton="false"
+        enableScrolling="false"
+    >
+        <fb:FilterBar
+            id="filterbar"
+            useToolbar="false"
+            search="onFilterPress"
+        >
+            <fb:filterItems>
+                <fb:FilterItem
+                    name="FCID"
+                    label="FCID"
+                >
+                    <fb:control>
+                        <Input
+                            id="FCID"
+                            placeholder="Select FCID"
+                            showValueHelp="true"
+                            valueHelpRequest="onFCIDSelect"
+                            valueHelpOnly="false"
+                            value="{path: 'oFilterHlp>/selFCID', formatter: '.formatMatList'}"
+                        />
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Customer"
+                    label="Customer"
+                >
+                    <fb:control>
+                        <Input
+                            id="customer"
+                            placeholder="Select Customer"
+                            showValueHelp="true"
+                            valueHelpRequest="onCustomerSelect"
+                            valueHelpOnly="false"
+                            value="{path: 'oFilterHlp>/selCustomer', formatter: '.formatMatList'}"
+                        />
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Sales Order"
+                    label="Sales Order"
+                >
+                    <fb:control>
+                        <Input
+                            id="salesOrder"
+                            placeholder="Select Sales Order"
+                            showValueHelp="true"
+                            valueHelpRequest="onSalesOrderSelect"
+                            valueHelpOnly="false"
+                            value="{path: 'oFilterHlp>/selSalesOrder', formatter: '.formatMatList'}"
+                        />
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="System Risk"
+                    label="System Risk"
+                >
+                    <fb:control>
+                        <Input
+                            id="systemRisk"
+                            placeholder="Select System Risk"
+                            showValueHelp="true"
+                            valueHelpRequest="onSystemRiskSelect"
+                            valueHelpOnly="false"
+                            value="{path: 'oFilterHlp>/selSystemRisk', formatter: '.formatMatList'}"
+                        />
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Pilot Project Number"
+                    label="Pilot Project Number"
+                >
+                    <fb:control>
+                        <Input
+                            id="pilotProjectNumber"
+                            placeholder="Select Pilot Project Number"
+                            showValueHelp="true"
+                            valueHelpRequest="onPilotProjectSelect"
+                            valueHelpOnly="false"
+                            value="{path: 'oFilterHlp>/selPilotProject', formatter: '.formatMatList'}"
+                        />
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Config Frozen Date"
+                    label="Config Frozen Date"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="configFrozenDate"
+                            placeholder="Select Config Frozen Date"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Launch Date"
+                    label="Launch Date"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="launchDate"
+                            placeholder="Select LaunchDate"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Actual Ship Date"
+                    label="Actual Ship Date"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="actualShipDate"
+                            placeholder="Select Actual Ship Date"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="TSD"
+                    label="TSD"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="TSD"
+                            placeholder="Select TSD"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="MCSD"
+                    label="MCSD"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="MCSD"
+                            placeholder="Select MCSD"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Pilot WBS Number"
+                    label="Pilot WBS Number"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="pilotWBSNumber"
+                            placeholder="Select Pilot WBS Number"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="MCSD missed flag"
+                    label="MCSD missed flag"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="MCSDmissedflag"
+                            placeholder="Select MCSD missed flag"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="BKO Flag (System level)"
+                    label="BKO Flag (System level)"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="BKOFlag"
+                            placeholder="Select BKO Flag (System level)"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Fab"
+                    label="Fab"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="fab"
+                            placeholder="Select Fab"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Region"
+                    label="Region"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="region"
+                            placeholder="Select Region"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Business Group"
+                    label="Business Group"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="businessGroup"
+                            placeholder="Select Business Group"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="System Group Product"
+                    label="System Group Product"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="systemGroupProduct"
+                            placeholder="Select System Group Product"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Rev Code"
+                    label="Rev Code"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="revCode"
+                            placeholder="Select Rev Code"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Partner function"
+                    label="Partner function"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="partnerFunction"
+                            placeholder="Select Partner function"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Partner ID"
+                    label="Partner ID"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="partnerID"
+                            placeholder="Select Partner ID"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="RSO"
+                    label="RSO"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="RSO"
+                            placeholder="Select RSO"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="OF Team"
+                    label="OF Team"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="OFTeam"
+                            placeholder="Select OF Team"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="SRD"
+                    label="SRD"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="SRD"
+                            placeholder="Select SRD"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Config Frozen Date Item"
+                    label="Config Frozen Date Item"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="configFrozenDateItem"
+                            placeholder="Select Config Frozen Date Item"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Config Frozen date Header"
+                    label="Config Frozen date Header"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="configFrozenDateHeader"
+                            placeholder="Select Config Frozen date Header"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Launch Date2"
+                    label="Launch Date2"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="launchDate2"
+                            placeholder="Select Launch Date2"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Act Ship Date (ASD)"
+                    label="Act Ship Date (ASD)"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="actShipDate"
+                            placeholder="Select Act Ship Date (ASD)"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Ship Quarter"
+                    label="Ship Quarter"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="shipQuarter"
+                            placeholder="Select Ship Quarter"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Ship Year"
+                    label="Ship Year"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="shipYear"
+                            placeholder="Select Ship Year"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Rev Qtr"
+                    label="Rev Qtr"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="revQtr"
+                            placeholder="Select Rev Qtr"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Rev Year"
+                    label="Rev Year"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="revYear"
+                            placeholder="Select Rev Year"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+                <fb:FilterItem
+                    name="Revenue Risk"
+                    label="Revenue Risk"
+                    visibleInFilterBar="false"
+                >
+                    <fb:control>
+                        <Input
+                            id="revenueRisk"
+                            placeholder="Select Revenue Risk"
+                        />
+                        <!-- showValueHelp="true"
+                                        valueHelpRequest="onPlantSelect"
+                                        valueHelpOnly="false"
+                                        value="{path: 'oModelValHlp>/selPlant', formatter: '.formatMatList'}" -->
+                    </fb:control>
+                </fb:FilterItem>
+            </fb:filterItems>
+        </fb:FilterBar>
+        <Panel class="sapUiTinyMarginTop">
+            <l:Grid defaultSpan="XL7 L7 M8 S6">
+                <VBox alignItems="Center">
+                    <layoutData>
+                        <l:GridData
+                            span="XL5 L5 M4 S12"
+                            linebreak="true"
+                        />
+                    </layoutData>
+                    <viz:VizFrame
+                        id="donutChart1"
+                        visible="true"
+                        class="sapUiSmallMarginTop"
+                        width="370px"
+                        height="290px"
+                        vizType="donut"
+                        uiConfig="{applicationSet:'fiori'}"
+                        vizProperties="{
+                                title: {
+                                    visible: true,
+                                    text: 'MileStone Risks'
+                                },
+                                legend: {
+                                    visible: true,
+                                            isScrollable: true,
+                                            label: {
+                                                style: {
+                                                    fontSize: '10px'
+                                                    }
+                                                }
+                                },
+                                legendGroup: {
+                                    layout: {
+                                    position: 'right',
+                                    width: '105px'
+                                    }
+                                },
+                                plotArea: {
+                                    dataLabel: {
+                                    visible: true,
+                                    type: 'value',
+                                    hideWhenOverlap: true,
+                                    formatString: ['']
+                                    },
+                                    radius: 0.5
+                                }
+                                }"
+                    >
+                        <viz:dataset>
+                            <viz.data:FlattenedDataset
+                                data="{oChartDyna>/Chart1}"
+                            >
+                                <viz.data:dimensions>
+                                    <viz.data:DimensionDefinition
+                                        name="Segment"
+                                        value="{label}"
+                                    />
+                                </viz.data:dimensions>
+                                <viz.data:measures>
+                                    <viz.data:MeasureDefinition
+                                        name="Value"
+                                        value="{value}"
+                                    />
+                                </viz.data:measures>
+                            </viz.data:FlattenedDataset>
+                        </viz:dataset>
+                        <viz:feeds>
+                            <viz.feeds:FeedItem
+                                uid="size"
+                                type="Measure"
+                                values="Value"
+                            />
+                            <viz.feeds:FeedItem
+                                uid="color"
+                                type="Dimension"
+                                values="Segment"
+                            />
+                        </viz:feeds>
+                    </viz:VizFrame>
+                </VBox>
+
+                <!-- Table  -->
+                <OverflowToolbar>
+                    <!-- <Text text="Table"></Text> -->
+                    <ToolbarSpacer />
+                    <Select
+                        id="OrdBOMcbBut"
+                        change="onCBoxSelectionChangeButtons"
+                    >
+                        <items>
+                            <core:Item
+                                key="1"
+                                text="None"
+                            />
+                            <core:Item
+                                key="2"
+                                text="ECC S4 Sync mismatch"
+                            />
+                            <core:Item
+                                key="3"
+                                text="Deviations and waivers"
+                            />
+                            <core:Item
+                                key="4"
+                                text="Complete FCID List"
+                            />
+                            <core:Item
+                                key="5"
+                                text="Revenue Risk"
+                            />
+                            <core:Item
+                                key="6"
+                                text="Overdue colloboration and work"
+                            />
+                            <core:Item
+                                key="7"
+                                text="Job failure"
+                            />
+                        </items>
+                    </Select>
+                    <Select
+                        id="OrdBOMcb"
+                        change="onCBoxSelectionChange"
+                    >
+                        <items>
+                            <core:Item
+                                key="1"
+                                text="All"
+                            />
+                            <core:Item
+                                key="2"
+                                text="Manual Run"
+                            />
+                            <core:Item
+                                key="3"
+                                text="Job Failure"
+                            />
+                        </items>
+                    </Select>
+                    <Button
+                        icon="sap-icon://action-settings"
+                        tooltip="Choose Columns"
+                        press=".onOpenSettings"
+                    />
+                </OverflowToolbar>
+                <ScrollContainer
+                    vertical="true"
+                    horizontal="true"
+                >
+                    <Table
+                        id="tableRisk"
+                        fixedLayout="false"
+                        items="{oModelRisk>/RiskData}"
+                        growing="true"
+                        growingThreshold="10"
+                        growingScrollToLoad="true"
+                        inset="false"
+                        mode="MultiSelect"
+                        ariaLabelledBy="title"
+                        selectionChange="onSelectionChange"
+                    >
+                        <columns>
+                            <Column>
+                                <Text
+                                    text="FCID"
+                                    wrapping="false"
+                                />
+                            </Column>
+                            <Column visible="false">
+                                <Text
+                                    text="Config Frozen Date"
+                                    wrapping="false"
+                                />
+                            </Column>
+                            <Column visible="false">
+                                <Text
+                                    text="Launch Date"
+                                    wrapping="false"
+                                />
+                            </Column>
+                            <Column visible="false">
+                                <Text
+                                    text="TSD"
+                                    wrapping="false"
+                                />
+                            </Column>
+                            <Column visible="false">
+                                <Text
+                                    text="System Risk"
+                                    wrapping="false"
+                                />
+                            </Column>
+                            <Column visible="false">
+                                <Text
+                                    text="MCSD Missed Flag"
+                                    wrapping="false"
+                                />
+                            </Column>
+                            <Column>
+                                <Text
+                                    text="Customer"
+                                    wrapping="false"
+                                />
+                            </Column>
+                            <Column>
+                                <Text
+                                    text="Fab"
+                                    wrapping="false"
+                                />
+                            </Column>
+                            <Column visible="false">
+                                <Text
+                                    text="Rev Code"
+                                    wrapping="false"
+                                />
+                            </Column>
+                            <!-- <Column>
+                            <Text
+                                text="OF Team"
+                                wrapping="false"
+                            />
+                        </Column> -->
+                            <Column visible="false">
+                                <Text
+                                    text="SRD"
+                                    wrapping="false"
+                                />
+                            </Column>
+                            <Column visible="false">
+                                <Text
+                                    text="Config Frozen Date Header"
+                                    wrapping="false"
+                                />
+                            </Column>
+                            <Column visible="false">
+                                <Text
+                                    text="Launch Date"
+                                    wrapping="false"
+                                />
+                            </Column>
+                            <Column visible="false">
+                                <Text
+                                    text="Act Ship Date (ASD)"
+                                    wrapping="false"
+                                />
+                            </Column>
+                            <Column visible="false">
+                                <Text
+                                    text="System Risk Override"
+                                    wrapping="false"
+                                />
+                            </Column>
+                            <Column visible="false">
+                                <Text
+                                    text="SPM Risk"
+                                    wrapping="false"
+                                />
+                            </Column>
+                            <Column visible="false">
+                                <Text
+                                    text="Priority Status"
+                                    wrapping="false"
+                                />
+                            </Column>
+                            <Column visible="false">
+                                <Text
+                                    text="Active Quote ID"
+                                    wrapping="false"
+                                />
+                            </Column>
+                            <Column visible="false">
+                                <Text
+                                    text="System Description"
+                                    wrapping="false"
+                                />
+                            </Column>
+                            <Column>
+                                <Text
+                                    text="SPM"
+                                    wrapping="false"
+                                />
+                            </Column>
+                            <Column>
+                                <Text
+                                    text="CE"
+                                    wrapping="false"
+                                />
+                            </Column>
+                            <Column visible="false">
+                                <Text
+                                    text="PC"
+                                    wrapping="false"
+                                />
+                            </Column>
+                            <Column>
+                                <Text
+                                    text="OF Team"
+                                    wrapping="false"
+                                />
+                            </Column>
+                            <Column visible="false">
+                                <Text
+                                    text="CRD"
+                                    wrapping="false"
+                                />
+                            </Column>
+                            <Column visible="false">
+                                <Text
+                                    text="Open Change Request"
+                                    wrapping="false"
+                                />
+                            </Column>
+                            <Column visible="false">
+                                <Text
+                                    text="Open NSR Workflow"
+                                    wrapping="false"
+                                />
+                            </Column>
+                            <Column visible="false">
+                                <Text
+                                    text="MCSD update"
+                                    wrapping="false"
+                                />
+                            </Column>
+                            <Column visible="false">
+                                <Text
+                                    text="Comments"
+                                    wrapping="false"
+                                />
+                            </Column>
+                            <Column visible="false">
+                                <Text
+                                    text="ECC/S4"
+                                    wrapping="false"
+                                />
+                            </Column>
+                            <Column visible="false">
+                                <Text
+                                    text="DEv/Wai"
+                                    wrapping="false"
+                                />
+                            </Column>
+                            <Column visible="false">
+                                <Text
+                                    text="ComFCID"
+                                    wrapping="false"
+                                />
+                            </Column>
+                            <Column visible="false">
+                                <Text
+                                    text="REvRisk"
+                                    wrapping="false"
+                                />
+                            </Column>
+                            <Column visible="false">
+                                <Text
+                                    text="ODC"
+                                    wrapping="false"
+                                />
+                            </Column>
+                        </columns>
+
+                        <items>
+                            <ColumnListItem
+                                type="Navigation"
+                                press="onListItemPress"
+                                vAlign="Middle"
+                            >
+                                <cells>
+                                    <Text
+                                        text="{oModelRisk>Fcid}"
+                                        wrapping="false"
+                                    />
+                                    <Text
+                                        text="{oModelRisk>Configfrozendate}"
+                                        wrapping="false"
+                                    />
+                                    <Text
+                                        text="{oModelRisk>Launchdate}"
+                                        wrapping="false"
+                                    />
+                                    <Text
+                                        text="{oModelRisk>Tsd}"
+                                        wrapping="false"
+                                    />
+                                    <Text
+                                        text="{oModelRisk>Systemrisk}"
+                                        wrapping="false"
+                                    />
+                                    <Text
+                                        text="{oModelRisk>Undefined}"
+                                        wrapping="false"
+                                    />
+                                    <Text
+                                        text="{oModelRisk>Customer}"
+                                        wrapping="false"
+                                    />
+                                    <Text
+                                        text="{oModelRisk>Customerfab}"
+                                        wrapping="false"
+                                    />
+                                    <Text
+                                        text="{oModelRisk>Revenuecode}"
+                                        wrapping="false"
+                                    />
+                                    <!-- <Text
+                                    text="{oModelRisk>Ofteam}"
+                                    wrapping="false"
+                                /> -->
+                                    <Text
+                                        text="{oModelRisk>Srd}"
+                                        wrapping="false"
+                                    />
+                                    <Text
+                                        text="{oModelRisk>Undefined}"
+                                        wrapping="false"
+                                    />
+                                    <Text
+                                        text="{oModelRisk>Launchdate}"
+                                        wrapping="false"
+                                    />
+                                    <Text
+                                        text="{oModelRisk>Actshipdate}"
+                                        wrapping="false"
+                                    />
+                                    <Text
+                                        wrapping="false"
+                                        text="{oModelRisk>Systemriskoverride}"
+                                    />
+                                    <Text
+                                        wrapping="false"
+                                        text="{oModelRisk>Spmrisk}"
+                                    />
+                                    <Text
+                                        wrapping="false"
+                                        text="{oModelRisk>Prioritystatus}"
+                                    />
+                                    <Text
+                                        wrapping="false"
+                                        text="{oModelRisk>Quoteid}"
+                                    />
+                                    <Text
+                                        wrapping="false"
+                                        text="{oModelRisk>Undefined}"
+                                    />
+                                    <Text
+                                        wrapping="false"
+                                        text="{oModelRisk>Partnerpm}"
+                                    />
+                                    <Text
+                                        wrapping="false"
+                                        text="{oModelRisk>Partnerce}"
+                                    />
+                                    <Text
+                                        wrapping="false"
+                                        text="{oModelRisk>Partnerpc}"
+                                    />
+                                    <Text
+                                        wrapping="false"
+                                        text="{oModelRisk>Ofteam}"
+                                    />
+                                    <Text
+                                        wrapping="false"
+                                        text="{oModelRisk>Crd}"
+                                    />
+                                    <Text
+                                        wrapping="false"
+                                        text="{oModelRisk>Openchangerequest}"
+                                    />
+                                    <Text
+                                        wrapping="false"
+                                        text="{oModelRisk>Opennsrwfs}"
+                                    />
+                                    <Text
+                                        wrapping="false"
+                                        text="{oModelRisk>Mscdupdate}"
+                                    />
+                                    <Text
+                                        wrapping="false"
+                                        text="{oModelRisk>Comments}"
+                                    />
+                                    <Text
+                                        wrapping="false"
+                                        text="{oModelRisk>Eccs4miss}"
+                                    />
+                                    <Text
+                                        wrapping="false"
+                                        text="{oModelRisk>Devwaive}"
+                                    />
+                                    <Text
+                                        wrapping="false"
+                                        text="{oModelRisk>Comfcid}"
+                                    />
+                                    <Text
+                                        wrapping="false"
+                                        text="{oModelRisk>Revrisk}"
+                                    />
+                                    <Text
+                                        wrapping="false"
+                                        text="{oModelRisk>Undefined}"
+                                    />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </ScrollContainer>
+            </l:Grid>
+        </Panel>
+    </Page>
+</mvc:View>
+**************************************
+sap.ui.define([
+	"sap/ui/core/mvc/Controller", 'sap/m/p13n/Engine',
+	'sap/m/p13n/SelectionController',
+	'sap/m/p13n/SortController',
+	'sap/m/p13n/GroupController',
+	'sap/m/p13n/MetadataHelper',
+	'sap/ui/model/Sorter',
+	'sap/m/ColumnListItem',
+	'sap/m/Text',
+	'sap/ui/core/library',
+	'sap/m/table/ColumnWidthController',
+	'sap/ui/model/json/JSONModel'
+], (Controller, Engine, SelectionController, SortController, GroupController, MetadataHelper, Sorter, ColumnListItem, Text, coreLibrary, ColumnWidthController, JSONModel) => {
+	"use strict";
+
+	return Controller.extend("com.lam.p2f.orm.zordfd.controller.Main", {
+		onInit() {
+			var oFilterHlp = new JSONModel({
+				selFCID: "",
+				selCustomer: "",
+				selSalesOrder: "",
+				selSystemRisk: "",
+				selPilotProject: ""
+			});
+			this.getView().setModel(oFilterHlp, "oFilterHlp");
+
+			var oChartDyna = new JSONModel({
+				Chart1: [
+					{ value: 0, label: "Low" },
+					{ value: 0, label: "Medium" },
+					{ value: 0, label: "High" },
+				]
+			});
+			this.getView().setModel(oChartDyna, "oChartDyna")
+
+			var oModelRisk = new JSONModel({
+
+			});
+			this.getView().setModel(oModelRisk, "oModelRisk");
+
+			var oOMDModel = new JSONModel({
+
+			});
+			this.getView().setModel(oOMDModel,"oOMDModel");
+
+			this._getChartData();
+			this._getMainTableData();
+		},
+
+		onFCIDSelect: function (oEvent) {
+			const oView = this.getView();
+			const oModelValHlp = oView.getModel("oFilterHlp");
+			// oModelValHlp.setProperty("/selPlant", []);
+			const aSelectedKeys = oModelValHlp.getProperty("/selFCID") || [];
+
+			const oDialog = new sap.ui.comp.valuehelpdialog.ValueHelpDialog({
+				title: "Select FCID",
+				supportMultiselect: true,
+				supportRanges: false,
+				key: "Fcid",
+				descriptionKey: "Fcid",
+				ok: function (oEvent) {
+					const aTokens = oEvent.getParameter("tokens") || [];
+					const aSelected = aTokens.map(token => token.getKey());
+					oModelValHlp.setProperty("/selFCID", aSelected);
+
+					const oPlantInput = oView.byId("FCID");
+
+					if (aSelected) {
+						oPlantInput.setValueState("None");
+					}
+					oDialog.close();
+				},
+				cancel: function () {
+					oDialog.close();
+				},
+				afterClose: function () {
+					oDialog.destroy();
+				}
+			});
+
+			// Table Setup
+			const oTable = new sap.ui.table.Table({
+				visibleRowCount: 7,
+				selectionMode: "MultiToggle"
+			});
+
+			oTable.addColumn(new sap.ui.table.Column({
+				label: new sap.m.Label({ text: "FCID" }),
+				template: new sap.m.Text({ text: "{Fcid}" })
+			}));
+
+			const oVHModel = new sap.ui.model.json.JSONModel();
+
+			oTable.setModel(oVHModel);
+			oTable.bindRows("/value");
+
+			const oSearchField = new sap.m.SearchField({
+				showSearchButton: true,
+				search: function (oEvent) {
+					const sQuery = oEvent.getParameter("query")?.trim();
+					if (!sQuery) return;
+
+
+					const oComponent = this.getOwnerComponent();
+					const sServiceURL = this.getView().getModel().getServiceUrl();
+					const sBaseUrl = sServiceURL;
+					const sEntity = "FcidVH";
+					const sFilter = `contains(Fcid,'${sQuery}')`;
+					const sFilteredUrl = `${sBaseUrl}${sEntity}?$filter=${encodeURIComponent(sFilter)}`;
+
+					oVHModel.loadData(sFilteredUrl, null, true, "GET", false, false, {
+						Accept: "application/json"
+					});
+
+					oVHModel.attachRequestFailed(() => {
+						sap.m.MessageBox.error("Search failed. Please try again.");
+					});
+				}.bind(this)
+			});
+
+			// FilterBar
+			const oFilterBar = new sap.ui.comp.filterbar.FilterBar({
+				advancedMode: true,
+				filterBarExpanded: true,
+				showGoOnFB: false,
+				showClearButton: true,
+				basicSearch: oSearchField
+			});
+
+			// Set table & filter bar into dialog
+			oDialog.setTable(oTable);
+			oDialog.setFilterBar(oFilterBar);
+			oDialog.setRangeKeyFields([{ label: "FCID", key: "Fcid", type: "string" }]);
+
+			const aTokens = aSelectedKeys.map(k => new sap.m.Token({ key: k, text: k }));
+			oDialog.setTokens(aTokens);
+
+			// Load Plants by default
+
+			const oComponent = this.getOwnerComponent();
+			//const sServiceURL = oComponent.getManifestEntry("sap.app").dataSources["mainService"].uri;
+
+			const sServiceURL = this.getView().getModel().getServiceUrl();
+			const sPreloadUrl = `${sServiceURL}FcidVH?$top=100`;
+			oVHModel.loadData(sPreloadUrl, null, true, "GET", false, false, {
+				Accept: "application/json"
+			});
+
+			oVHModel.attachRequestCompleted(() => {
+				oDialog.open();
+			});
+
+			oVHModel.attachRequestFailed(() => {
+				sap.m.MessageBox.error("Failed to load FCID list.");
+				oDialog.open();
+			});
+
+
+		},
+
+		onCustomerSelect: function (oEvent) {
+			const oView = this.getView();
+			const oModelValHlp = oView.getModel("oFilterHlp");
+			// oModelValHlp.setProperty("/selPlant", []);
+			const aSelectedKeys = oModelValHlp.getProperty("/selCustomer") || [];
+
+			const oDialog = new sap.ui.comp.valuehelpdialog.ValueHelpDialog({
+				title: "Select Customer",
+				supportMultiselect: true,
+				supportRanges: false,
+				key: "Customer",
+				descriptionKey: "Customer",
+				ok: function (oEvent) {
+					const aTokens = oEvent.getParameter("tokens") || [];
+					const aSelected = aTokens.map(token => token.getKey());
+					oModelValHlp.setProperty("/selCustomer", aSelected);
+
+					const oPlantInput = oView.byId("customer");
+
+					if (aSelected) {
+						oPlantInput.setValueState("None");
+					}
+					oDialog.close();
+				},
+				cancel: function () {
+					oDialog.close();
+				},
+				afterClose: function () {
+					oDialog.destroy();
+				}
+			});
+
+			// Table Setup
+			const oTable = new sap.ui.table.Table({
+				visibleRowCount: 7,
+				selectionMode: "MultiToggle"
+			});
+
+			oTable.addColumn(new sap.ui.table.Column({
+				label: new sap.m.Label({ text: "Customer" }),
+				template: new sap.m.Text({ text: "{Customer}" })
+			}));
+
+			const oVHModel = new sap.ui.model.json.JSONModel();
+
+			oTable.setModel(oVHModel);
+			oTable.bindRows("/value");
+
+			const oSearchField = new sap.m.SearchField({
+				showSearchButton: true,
+				search: function (oEvent) {
+					const sQuery = oEvent.getParameter("query")?.trim();
+					if (!sQuery) return;
+
+
+					const oComponent = this.getOwnerComponent();
+					const sServiceURL = this.getView().getModel().getServiceUrl();
+					const sBaseUrl = sServiceURL;
+					const sEntity = "CustVH";
+					const sFilter = `contains(Customer,'${sQuery}')`;
+					const sFilteredUrl = `${sBaseUrl}${sEntity}?$filter=${encodeURIComponent(sFilter)}`;
+
+					oVHModel.loadData(sFilteredUrl, null, true, "GET", false, false, {
+						Accept: "application/json"
+					});
+
+					oVHModel.attachRequestFailed(() => {
+						sap.m.MessageBox.error("Search failed. Please try again.");
+					});
+				}.bind(this)
+			});
+
+			// FilterBar
+			const oFilterBar = new sap.ui.comp.filterbar.FilterBar({
+				advancedMode: true,
+				filterBarExpanded: true,
+				showGoOnFB: false,
+				showClearButton: true,
+				basicSearch: oSearchField
+			});
+
+			// Set table & filter bar into dialog
+			oDialog.setTable(oTable);
+			oDialog.setFilterBar(oFilterBar);
+			oDialog.setRangeKeyFields([{ label: "Customer", key: "Customer", type: "string" }]);
+
+			const aTokens = aSelectedKeys.map(k => new sap.m.Token({ key: k, text: k }));
+			oDialog.setTokens(aTokens);
+
+			// Load Plants by default
+
+			const oComponent = this.getOwnerComponent();
+			//const sServiceURL = oComponent.getManifestEntry("sap.app").dataSources["mainService"].uri;
+
+			const sServiceURL = this.getView().getModel().getServiceUrl();
+			const sPreloadUrl = `${sServiceURL}CustVH?$top=100`;
+			oVHModel.loadData(sPreloadUrl, null, true, "GET", false, false, {
+				Accept: "application/json"
+			});
+
+			oVHModel.attachRequestCompleted(() => {
+				oDialog.open();
+			});
+
+			oVHModel.attachRequestFailed(() => {
+				sap.m.MessageBox.error("Failed to load Customer list.");
+				oDialog.open();
+			});
+
+
+		},
+
+		onSalesOrderSelect: function (oEvent) {
+			const oView = this.getView();
+			const oModelValHlp = oView.getModel("oFilterHlp");
+			// oModelValHlp.setProperty("/selPlant", []);
+			const aSelectedKeys = oModelValHlp.getProperty("/selSalesOrder") || [];
+
+			const oDialog = new sap.ui.comp.valuehelpdialog.ValueHelpDialog({
+				title: "Select Sales Order",
+				supportMultiselect: true,
+				supportRanges: false,
+				key: "Salesorder",
+				descriptionKey: "Sales Order",
+				ok: function (oEvent) {
+					const aTokens = oEvent.getParameter("tokens") || [];
+					const aSelected = aTokens.map(token => token.getKey());
+					oModelValHlp.setProperty("/selSalesOrder", aSelected);
+
+					const oPlantInput = oView.byId("salesOrder");
+
+					if (aSelected) {
+						oPlantInput.setValueState("None");
+					}
+					oDialog.close();
+				},
+				cancel: function () {
+					oDialog.close();
+				},
+				afterClose: function () {
+					oDialog.destroy();
+				}
+			});
+
+			// Table Setup
+			const oTable = new sap.ui.table.Table({
+				visibleRowCount: 7,
+				selectionMode: "MultiToggle"
+			});
+
+			oTable.addColumn(new sap.ui.table.Column({
+				label: new sap.m.Label({ text: "Sales Order" }),
+				template: new sap.m.Text({ text: "{Salesorder}" })
+			}));
+
+			const oVHModel = new sap.ui.model.json.JSONModel();
+
+			oTable.setModel(oVHModel);
+			oTable.bindRows("/value");
+
+			const oSearchField = new sap.m.SearchField({
+				showSearchButton: true,
+				search: function (oEvent) {
+					const sQuery = oEvent.getParameter("query")?.trim();
+					if (!sQuery) return;
+
+
+					const oComponent = this.getOwnerComponent();
+					const sServiceURL = this.getView().getModel().getServiceUrl();
+					const sBaseUrl = sServiceURL;
+					const sEntity = "SalesordVH";
+					const sFilter = `contains(Salesorder,'${sQuery}')`;
+					const sFilteredUrl = `${sBaseUrl}${sEntity}?$filter=${encodeURIComponent(sFilter)}`;
+
+					oVHModel.loadData(sFilteredUrl, null, true, "GET", false, false, {
+						Accept: "application/json"
+					});
+
+					oVHModel.attachRequestFailed(() => {
+						sap.m.MessageBox.error("Search failed. Please try again.");
+					});
+				}.bind(this)
+			});
+
+			// FilterBar
+			const oFilterBar = new sap.ui.comp.filterbar.FilterBar({
+				advancedMode: true,
+				filterBarExpanded: true,
+				showGoOnFB: false,
+				showClearButton: true,
+				basicSearch: oSearchField
+			});
+
+			// Set table & filter bar into dialog
+			oDialog.setTable(oTable);
+			oDialog.setFilterBar(oFilterBar);
+			oDialog.setRangeKeyFields([{ label: "Sales Order", key: "Salesorder", type: "string" }]);
+
+			const aTokens = aSelectedKeys.map(k => new sap.m.Token({ key: k, text: k }));
+			oDialog.setTokens(aTokens);
+
+			// Load Plants by default
+
+			const oComponent = this.getOwnerComponent();
+			//const sServiceURL = oComponent.getManifestEntry("sap.app").dataSources["mainService"].uri;
+
+			const sServiceURL = this.getView().getModel().getServiceUrl();
+			const sPreloadUrl = `${sServiceURL}SalesordVH?$top=100`;
+			oVHModel.loadData(sPreloadUrl, null, true, "GET", false, false, {
+				Accept: "application/json"
+			});
+
+			oVHModel.attachRequestCompleted(() => {
+				oDialog.open();
+			});
+
+			oVHModel.attachRequestFailed(() => {
+				sap.m.MessageBox.error("Failed to load Sales Order list.");
+				oDialog.open();
+			});
+		},
+
+		onSystemRiskSelect: function (oEvent) {
+			const oView = this.getView();
+			const oModelValHlp = oView.getModel("oFilterHlp");
+			// oModelValHlp.setProperty("/selPlant", []);
+			const aSelectedKeys = oModelValHlp.getProperty("/selSystemRisk") || [];
+
+			const oDialog = new sap.ui.comp.valuehelpdialog.ValueHelpDialog({
+				title: "Select System Risk",
+				supportMultiselect: true,
+				supportRanges: false,
+				key: "Systemrisk",
+				descriptionKey: "System Risk",
+				ok: function (oEvent) {
+					const aTokens = oEvent.getParameter("tokens") || [];
+					const aSelected = aTokens.map(token => token.getKey());
+					oModelValHlp.setProperty("/selSystemRisk", aSelected);
+
+					const oPlantInput = oView.byId("systemRisk");
+
+					if (aSelected) {
+						oPlantInput.setValueState("None");
+					}
+					oDialog.close();
+				},
+				cancel: function () {
+					oDialog.close();
+				},
+				afterClose: function () {
+					oDialog.destroy();
+				}
+			});
+
+			// Table Setup
+			const oTable = new sap.ui.table.Table({
+				visibleRowCount: 7,
+				selectionMode: "MultiToggle"
+			});
+
+			oTable.addColumn(new sap.ui.table.Column({
+				label: new sap.m.Label({ text: "System Risk" }),
+				template: new sap.m.Text({ text: "{Systemrisk}" })
+			}));
+
+			const oVHModel = new sap.ui.model.json.JSONModel();
+
+			oTable.setModel(oVHModel);
+			oTable.bindRows("/value");
+
+			const oSearchField = new sap.m.SearchField({
+				showSearchButton: true,
+				search: function (oEvent) {
+					const sQuery = oEvent.getParameter("query")?.trim();
+					if (!sQuery) return;
+
+
+					const oComponent = this.getOwnerComponent();
+					const sServiceURL = this.getView().getModel().getServiceUrl();
+					const sBaseUrl = sServiceURL;
+					const sEntity = "SysriskVH";
+					const sFilter = `contains(Systemrisk,'${sQuery}')`;
+					const sFilteredUrl = `${sBaseUrl}${sEntity}?$filter=${encodeURIComponent(sFilter)}`;
+
+					oVHModel.loadData(sFilteredUrl, null, true, "GET", false, false, {
+						Accept: "application/json"
+					});
+
+					oVHModel.attachRequestFailed(() => {
+						sap.m.MessageBox.error("Search failed. Please try again.");
+					});
+				}.bind(this)
+			});
+
+			// FilterBar
+			const oFilterBar = new sap.ui.comp.filterbar.FilterBar({
+				advancedMode: true,
+				filterBarExpanded: true,
+				showGoOnFB: false,
+				showClearButton: true,
+				basicSearch: oSearchField
+			});
+
+			// Set table & filter bar into dialog
+			oDialog.setTable(oTable);
+			oDialog.setFilterBar(oFilterBar);
+			oDialog.setRangeKeyFields([{ label: "System Risk", key: "Systemrisk", type: "string" }]);
+
+			const aTokens = aSelectedKeys.map(k => new sap.m.Token({ key: k, text: k }));
+			oDialog.setTokens(aTokens);
+
+			// Load Plants by default
+
+			const oComponent = this.getOwnerComponent();
+			//const sServiceURL = oComponent.getManifestEntry("sap.app").dataSources["mainService"].uri;
+
+			const sServiceURL = this.getView().getModel().getServiceUrl();
+			const sPreloadUrl = `${sServiceURL}SysriskVH?$top=100`;
+			oVHModel.loadData(sPreloadUrl, null, true, "GET", false, false, {
+				Accept: "application/json"
+			});
+
+			oVHModel.attachRequestCompleted(() => {
+				oDialog.open();
+			});
+
+			oVHModel.attachRequestFailed(() => {
+				sap.m.MessageBox.error("Failed to load System Risk list.");
+				oDialog.open();
+			});
+		},
+
+		onPilotProjectSelect: function (oEvent) {
+			const oView = this.getView();
+			const oModelValHlp = oView.getModel("oFilterHlp");
+			// oModelValHlp.setProperty("/selPlant", []);
+			const aSelectedKeys = oModelValHlp.getProperty("/selPilotProject") || [];
+
+			const oDialog = new sap.ui.comp.valuehelpdialog.ValueHelpDialog({
+				title: "Select Pilot Project Number",
+				supportMultiselect: true,
+				supportRanges: false,
+				key: "Objnr",
+				descriptionKey: "Pilot Project Number",
+				ok: function (oEvent) {
+					const aTokens = oEvent.getParameter("tokens") || [];
+					const aSelected = aTokens.map(token => token.getKey());
+					oModelValHlp.setProperty("/selPilotProject", aSelected);
+
+					const oPlantInput = oView.byId("pilotProjectNumber");
+
+					if (aSelected) {
+						oPlantInput.setValueState("None");
+					}
+					oDialog.close();
+				},
+				cancel: function () {
+					oDialog.close();
+				},
+				afterClose: function () {
+					oDialog.destroy();
+				}
+			});
+
+			// Table Setup
+			const oTable = new sap.ui.table.Table({
+				visibleRowCount: 7,
+				selectionMode: "MultiToggle"
+			});
+
+			oTable.addColumn(new sap.ui.table.Column({
+				label: new sap.m.Label({ text: "Pilot Project Number" }),
+				template: new sap.m.Text({ text: "{Objnr}" })
+			}));
+
+			const oVHModel = new sap.ui.model.json.JSONModel();
+
+			oTable.setModel(oVHModel);
+			oTable.bindRows("/value");
+
+			const oSearchField = new sap.m.SearchField({
+				showSearchButton: true,
+				search: function (oEvent) {
+					const sQuery = oEvent.getParameter("query")?.trim();
+					if (!sQuery) return;
+
+
+					const oComponent = this.getOwnerComponent();
+					const sServiceURL = this.getView().getModel().getServiceUrl();
+					const sBaseUrl = sServiceURL;
+					const sEntity = "PilotprojVH";
+					const sFilter = `contains(Objnr,'${sQuery}')`;
+					const sFilteredUrl = `${sBaseUrl}${sEntity}?$filter=${encodeURIComponent(sFilter)}`;
+
+					oVHModel.loadData(sFilteredUrl, null, true, "GET", false, false, {
+						Accept: "application/json"
+					});
+
+					oVHModel.attachRequestFailed(() => {
+						sap.m.MessageBox.error("Search failed. Please try again.");
+					});
+				}.bind(this)
+			});
+
+			// FilterBar
+			const oFilterBar = new sap.ui.comp.filterbar.FilterBar({
+				advancedMode: true,
+				filterBarExpanded: true,
+				showGoOnFB: false,
+				showClearButton: true,
+				basicSearch: oSearchField
+			});
+
+			// Set table & filter bar into dialog
+			oDialog.setTable(oTable);
+			oDialog.setFilterBar(oFilterBar);
+			oDialog.setRangeKeyFields([{ label: "Pilot Project Number", key: "Objnr", type: "string" }]);
+
+			const aTokens = aSelectedKeys.map(k => new sap.m.Token({ key: k, text: k }));
+			oDialog.setTokens(aTokens);
+
+			// Load Plants by default
+
+			const oComponent = this.getOwnerComponent();
+			//const sServiceURL = oComponent.getManifestEntry("sap.app").dataSources["mainService"].uri;
+
+			const sServiceURL = this.getView().getModel().getServiceUrl();
+			const sPreloadUrl = `${sServiceURL}PilotprojVH?$top=100`;
+			oVHModel.loadData(sPreloadUrl, null, true, "GET", false, false, {
+				Accept: "application/json"
+			});
+
+			oVHModel.attachRequestCompleted(() => {
+				oDialog.open();
+			});
+
+			oVHModel.attachRequestFailed(() => {
+				sap.m.MessageBox.error("Failed to load Pilot Project Number list.");
+				oDialog.open();
+			});
+
+
+		},
+
+		formatMatList: function (aList) {
+			return Array.isArray(aList) ? aList.join(", ") : "";
+		},
+
+		_registerForP13n: function () {
+			var oTable = this.byId("persoTable");
+
+			this.oMetadataHelper = new MetadataHelper([
+				{ key: "firstName_col", label: "First Name", path: "local>firstName" },
+				{ key: "lastName_col", label: "Last Name", path: "local>lastName" },
+				{ key: "city_col", label: "City", path: "local>city" },
+				{ key: "size_col", label: "Size", path: "local>size" }
+			]);
+
+			Engine.getInstance().register(oTable, {
+				helper: this.oMetadataHelper,
+				controller: {
+					Columns: new SelectionController({
+						targetAggregation: "columns",
+						control: oTable
+					}),
+					Sorter: new SortController({
+						control: oTable
+					}),
+					Groups: new GroupController({
+						control: oTable
+					}),
+					ColumnWidth: new ColumnWidthController({
+						control: oTable
+					})
+				}
+			});
+
+			Engine.getInstance().attachStateChange(this.handleStateChange.bind(this));
+		},
+		_registerForP13n: function () {
+			var oTable = this.byId("persoTable");
+
+			this.oMetadataHelper = new MetadataHelper([
+				{ key: "firstName_col", label: "First Name", path: "local>firstName" },
+				{ key: "lastName_col", label: "Last Name", path: "local>lastName" },
+				{ key: "city_col", label: "City", path: "local>city" },
+				{ key: "size_col", label: "Size", path: "local>size" }
+			]);
+
+			Engine.getInstance().register(oTable, {
+				helper: this.oMetadataHelper,
+				controller: {
+					Columns: new SelectionController({
+						targetAggregation: "columns",
+						control: oTable
+					}),
+					Sorter: new SortController({
+						control: oTable
+					}),
+					Groups: new GroupController({
+						control: oTable
+					}),
+					ColumnWidth: new ColumnWidthController({
+						control: oTable
+					})
+				}
+			});
+
+			Engine.getInstance().attachStateChange(this.handleStateChange.bind(this));
+		},
+
+		openPersoDialog: function (oEvt) {
+			var oTable = this.byId("persoTable");
+
+			Engine.getInstance().show(oTable, ["Columns", "Sorter", "Groups"], {
+				contentHeight: "35rem",
+				contentWidth: "32rem",
+				source: oEvt.getSource()
+			});
+		},
+
+		_getKey: function (oControl) {
+			return this.getView().getLocalId(oControl.getId());
+		},
+
+		handleStateChange: function (oEvt) {
+			var oTable = this.byId("persoTable");
+			var oState = oEvt.getParameter("state");
+
+			if (!oState) {
+				return;
+			}
+
+			var aSorter = [];
+
+			oState.Groups.forEach(function (oGroup) {
+				aSorter.push(new Sorter(this.oMetadataHelper.getProperty(oGroup.key).path, false, true));
+			}.bind(this));
+
+			oState.Sorter.forEach(function (oSorter) {
+				var oExistingSorter = aSorter.find(function (oSort) {
+					return oSort.sPath === this.oMetadataHelper.getProperty(oSorter.key).path;
+				}.bind(this));
+
+				if (oExistingSorter) {
+					oExistingSorter.bDescending = !!oSorter.descending;
+				} else {
+					aSorter.push(new Sorter(this.oMetadataHelper.getProperty(oSorter.key).path, oSorter.descending));
+				}
+			}.bind(this));
+
+			oTable.getColumns().forEach(function (oColumn, iIndex) {
+				oColumn.setVisible(false);
+				oColumn.setWidth(oState.ColumnWidth[this._getKey(oColumn)]);
+				oColumn.setSortIndicator(coreLibrary.SortOrder.None);
+				oColumn.data("grouped", false);
+			}.bind(this));
+
+			oState.Sorter.forEach(function (oSorter) {
+				var oCol = this.byId(oSorter.key);
+				if (oSorter.sorted !== false) {
+					oCol.setSortIndicator(oSorter.descending ? coreLibrary.SortOrder.Descending : coreLibrary.SortOrder.Ascending);
+				}
+			}.bind(this));
+
+			oState.Groups.forEach(function (oSorter) {
+				var oCol = this.byId(oSorter.key);
+				oCol.data("grouped", true);
+			}.bind(this));
+
+			oState.Columns.forEach(function (oProp, iIndex) {
+				var oCol = this.byId(oProp.key);
+				oCol.setVisible(true);
+
+				oTable.removeColumn(oCol);
+				oTable.insertColumn(oCol, iIndex);
+			}.bind(this));
+
+			var aCells = oState.Columns.map(function (oColumnState) {
+				return new Text({
+					text: "{" + this.oMetadataHelper.getProperty(oColumnState.key).path + "}"
+				});
+			}.bind(this));
+
+			oTable.bindItems({
+				templateShareable: false,
+				path: 'local>/TableItems',
+				sorter: aSorter,
+				template: new ColumnListItem({
+					cells: aCells
+				})
+			});
+
+		},
+
+		beforeOpenColumnMenu: function (oEvt) {
+			var oMenu = this.byId("menu");
+			var oColumn = oEvt.getParameter("openBy");
+			var oSortItem = oMenu.getQuickActions()[0].getItems()[0];
+			var oGroupItem = oMenu.getQuickActions()[1].getItems()[0];
+
+			oSortItem.setKey(this._getKey(oColumn));
+			oSortItem.setLabel(oColumn.getHeader().getText());
+			oSortItem.setSortOrder(oColumn.getSortIndicator());
+
+			oGroupItem.setKey(this._getKey(oColumn));
+			oGroupItem.setLabel(oColumn.getHeader().getText());
+			oGroupItem.setGrouped(oColumn.data("grouped"));
+		},
+
+		onColumnHeaderItemPress: function (oEvt) {
+			var oTable = this.byId("persoTable");
+
+			var oColumnHeaderItem = oEvt.getSource();
+			var sPanel = "Columns";
+			if (oColumnHeaderItem.getIcon().indexOf("group") >= 0) {
+				sPanel = "Groups";
+			} else if (oColumnHeaderItem.getIcon().indexOf("sort") >= 0) {
+				sPanel = "Sorter";
+			}
+
+			Engine.getInstance().show(oTable, [sPanel], {
+				contentHeight: "35rem",
+				contentWidth: "32rem",
+				source: oTable
+			});
+		},
+
+		onSort: function (oEvt) {
+			var oSortItem = oEvt.getParameter("item");
+			var oTable = this.byId("persoTable");
+			var sAffectedProperty = oSortItem.getKey();
+			var sSortOrder = oSortItem.getSortOrder();
+
+			//Apply the state programatically on sorting through the column menu
+			//1) Retrieve the current personalization state
+			Engine.getInstance().retrieveState(oTable).then(function (oState) {
+
+				//2) Modify the existing personalization state --> clear all sorters before
+				oState.Sorter.forEach(function (oSorter) {
+					oSorter.sorted = false;
+				});
+
+				if (sSortOrder !== coreLibrary.SortOrder.None) {
+					oState.Sorter.push({
+						key: sAffectedProperty,
+						descending: sSortOrder === coreLibrary.SortOrder.Descending
+					});
+				}
+
+				//3) Apply the modified personalization state to persist it in the VariantManagement
+				Engine.getInstance().applyState(oTable, oState);
+			});
+		},
+
+		onGroup: function (oEvt) {
+			var oGroupItem = oEvt.getParameter("item");
+			var oTable = this.byId("persoTable");
+			var sAffectedProperty = oGroupItem.getKey();
+
+			//1) Retrieve the current personalization state
+			Engine.getInstance().retrieveState(oTable).then(function (oState) {
+
+				//2) Modify the existing personalization state --> clear all groupings before
+				oState.Groups.forEach(function (oSorter) {
+					oSorter.grouped = false;
+				});
+
+				if (oGroupItem.getGrouped()) {
+					oState.Groups.push({
+						key: sAffectedProperty
+					});
+				}
+
+				//3) Apply the modified personalization state to persist it in the VariantManagement
+				Engine.getInstance().applyState(oTable, oState);
+			});
+		},
+
+		onColumnMove: function (oEvt) {
+			var oDraggedColumn = oEvt.getParameter("draggedControl");
+			var oDroppedColumn = oEvt.getParameter("droppedControl");
+
+			if (oDraggedColumn === oDroppedColumn) {
+				return;
+			}
+
+			var oTable = this.byId("persoTable");
+			var sDropPosition = oEvt.getParameter("dropPosition");
+			var iDraggedIndex = oTable.indexOfColumn(oDraggedColumn);
+			var iDroppedIndex = oTable.indexOfColumn(oDroppedColumn);
+			var iNewPos = iDroppedIndex + (sDropPosition == "Before" ? 0 : 1) + (iDraggedIndex < iDroppedIndex ? -1 : 0);
+			var sKey = this._getKey(oDraggedColumn);
+
+			Engine.getInstance().retrieveState(oTable).then(function (oState) {
+
+				var oCol = oState.Columns.find(function (oColumn) {
+					return oColumn.key === sKey;
+				}) || { key: sKey };
+				oCol.position = iNewPos;
+
+				Engine.getInstance().applyState(oTable, { Columns: [oCol] });
+			});
+		},
+
+		onColumnResize: function (oEvt) {
+			var oColumn = oEvt.getParameter("column");
+			var sWidth = oEvt.getParameter("width");
+			var oTable = this.byId("persoTable");
+
+			var oColumnState = {};
+			oColumnState[this._getKey(oColumn)] = sWidth;
+
+			Engine.getInstance().applyState(oTable, {
+				ColumnWidth: oColumnState
+			});
+		},
+
+		_getChartData: function () {
+			var oModel = this.getOwnerComponent().getModel();
+			const oListBinding = oModel.bindList("/OFD_Dash", null, null, null, {
+				// $filter: sFilter
+			});
+
+			oListBinding.requestContexts().then((aContexts) => {
+				const oCounts = aContexts[0].getObject();
+				const oJModel = this.getView().getModel("oChartDyna");
+
+				if (oCounts.Low === 0 && oCounts.Medium === 0 && oCounts.High === 0) {
+
+					oJModel.setProperty("/Chart1", [
+						{ label: "No Data", value: 1 }
+					])
+
+					var temp = this.getView().byId("donutChart1").getVizProperties();
+					temp.plotArea.dataLabel.visible = false;
+					this.getView().byId("donutChart1").setVizProperties(temp);
+				}
+				else {
+					oJModel.setProperty("/Chart1", [
+						{ label: "Low", value: oCounts.Low },
+						{ label: "Medium", value: oCounts.Medium },
+						{ label: "High", value: oCounts.High }
+					])
+
+					var temp = this.getView().byId("donutChart1").getVizProperties();
+					temp.plotArea.dataLabel.visible = true;
+					this.getView().byId("donutChart1").setVizProperties(temp);
+				}
+			});
+		},
+
+		_getMainTableData: function () {
+			var oModel = this.getOwnerComponent().getModel();
+			const oListBinding = oModel.bindList("/OFD_Dash", null, null, null, {
+				// $filter: sFilter
+			});
+
+			oListBinding.requestContexts().then((aContexts) => {
+				const oCounts = aContexts.map(ctx => ctx.getObject());
+				const oJModel = this.getView().getModel("oModelRisk");
+				oJModel.setData({ RiskData: oCounts });
+			});
+		},
+
+		onOpenSettings: function () {
+			const oTable = this.byId("tableRisk");
+			const aCols = oTable.getColumns();
+
+			// build current state of columns
+			const aState = aCols.map((c, idx) => {
+				const sText = c.getHeader() && c.getHeader().getText ? c.getHeader().getText() : ("Column " + (idx + 1));
+				return { id: c.getId(), text: sText, visible: c.getVisible() };
+			});
+
+			const oModel = new sap.ui.model.json.JSONModel({ columns: aState });
+
+			if (!this._oSettingsDialog) {
+				// list with checkbox per item
+				const oList = new sap.m.List({
+					items: {
+						path: "/columns",
+						template: new sap.m.CustomListItem({
+							content: [
+								new sap.m.HBox({
+									items: [
+										new sap.m.CheckBox({
+											selected: "{visible}",   // bound to visibility state
+											select: function (oEvt) {
+												const ctx = oEvt.getSource().getBindingContext();
+												oModel.setProperty(ctx.getPath() + "/visible", oEvt.getParameter("selected"));
+											}
+										}),
+										new sap.m.Text({ text: "{text}", width: "100%", wrapping: false })
+									]
+								}).addStyleClass("sapUiSmallMargin")
+							]
+						})
+					}
+				});
+
+				this._oSettingsDialog = new sap.m.Dialog({
+					title: "Choose Columns",
+					contentWidth: "25rem",
+					contentHeight: "20rem",
+					resizable: true,
+					draggable: true,
+					content: [oList],
+					beginButton: new sap.m.Button({
+						text: "Apply",
+						type: "Emphasized",
+						press: function () {
+							const aState = oModel.getProperty("/columns");
+							aState.forEach(s => {
+								const oCol = oTable.getColumns().find(c => c.getId() === s.id);
+								if (oCol) {
+									oCol.setVisible(!!s.visible);
+								}
+							});
+							this._oSettingsDialog.close();
+						}.bind(this)
+					}),
+					endButton: new sap.m.Button({
+						text: "Cancel",
+						press: () => this._oSettingsDialog.close()
+					})
+				});
+
+				this.getView().addDependent(this._oSettingsDialog);
+			}
+
+			this._oSettingsDialog.setModel(oModel);
+			this._oSettingsDialog.open();
+		},
+
+		onListItemPress: function (oEvent) {
+			var oModel = this.getOwnerComponent().getModel();
+			const oListBinding = oModel.bindList("/Intdash", null, null, null, {
+				// $filter: sFilter
+			});
+
+			oListBinding.requestContexts().then((aContexts) => {
+				const oCounts = aContexts.map(ctx => ctx.getObject());
+				const oJModel = this.getView().getModel("oOMDModel");
+				oJModel.setData({ Data: oCounts });
+				
+			});
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+				oRouter.navTo("OMDetail");
+		},
+
+		onNavBackPress: function () {
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("MainPage");
+		},
+
+		onFilterSelect: function (oEvent) {
+			var oBinding = this.byId("salesTable").getBinding("items")
+			var	sKey = oEvent.getParameter("key")
+		}
+
+		// onAfterRendering() {
+		// 	this.getView().getModel("local").setProperty("/Chart1", [
+		// 		{ name: "Add", value: 2, label: "Add", targetView: "Add / Change" },
+		// 		{ name: "Change", value: 6, label: "Change", targetView: "Change" },
+		// 		{ name: "Delete", value: 4, label: "Delete", targetView: "Delete" },
+		// 		{ name: "All", value: 8, label: "All", targetView: "All" }
+		// 	]);
+
+		// 	let items = [{
+		// 		key: "P1",
+		// 		firstName: "Peter",
+		// 		lastName: "Mueller",
+		// 		size: "1.75",
+		// 		city: "Walldorf"
+		// 	},
+		// 	{
+		// 		key: "P2",
+		// 		firstName: "Petra",
+		// 		lastName: "Maier",
+		// 		size: "1.85",
+		// 		city: "Walldorf"
+		// 	},
+		// 	{
+		// 		key: "P3",
+		// 		firstName: "Thomas",
+		// 		lastName: "Smith",
+		// 		size: "1.95",
+		// 		city: "Heidelberg"
+		// 	},
+		// 	{
+		// 		key: "P4",
+		// 		firstName: "John",
+		// 		lastName: "Williams",
+		// 		size: "1.65",
+		// 		city: "Walldorf"
+		// 	},
+		// 	{
+		// 		key: "P5",
+		// 		firstName: "Maria",
+		// 		lastName: "Jones",
+		// 		size: "1.55",
+		// 		city: "Walldorf"
+		// 	}
+		// 	];
+
+		// 	this.getView().getModel("local").setProperty("/TableItems", items);
+
+		// 	this._registerForP13n();
+		// }
+	});
+});
+
